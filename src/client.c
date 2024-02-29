@@ -6,7 +6,7 @@
 /*   By: eshintan <eshintan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 15:42:48 by eshintan          #+#    #+#             */
-/*   Updated: 2024/02/27 15:48:13 by eshintan         ###   ########.fr       */
+/*   Updated: 2024/03/01 01:01:15 by eshintan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	send_bit(pid_t pid, char c)
 			kill(pid, SIGUSR2);
 		c = c >> 1;
 		i++;
-		usleep(100);
+		usleep(500);
 	}
 }
 
