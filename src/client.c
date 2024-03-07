@@ -6,7 +6,7 @@
 /*   By: eshintan <eshintan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 15:42:48 by eshintan          #+#    #+#             */
-/*   Updated: 2024/03/01 01:01:15 by eshintan         ###   ########.fr       */
+/*   Updated: 2024/03/08 01:19:42 by eshintan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	send_bit(pid_t pid, char c)
 {
 	int	i;
 
-    i = 0;
-	while (i<8)
+	i = 0;
+	while (i < 8)
 	{
 		if (c & 1)
 			kill(pid, SIGUSR1);
@@ -39,17 +39,18 @@ void	handler(int signum, siginfo_t *info, void *context)
 
 int	main(int argc, char **argv)
 {
+	pid_t				pid;
+	char				*str;
+	struct sigaction	act;
+
 	if (argc != 3)
 	{
 		printf("Usage: %s <pid> <string>\n", argv[0]);
 		return (1);
 	}
-	pid_t pid = ft_atoi(argv[1]);
-	char *str = argv[2];
-	struct sigaction act;
-
+	pid = ft_atoi(argv[1]);
+	str = argv[2];
 	act.sa_sigaction;
-
 	act.sa_sigaction = handler;
 	act.sa_flags = SA_SIGINFO;
 	sigaction(SIGUSR1, &act, NULL);
