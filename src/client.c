@@ -6,7 +6,7 @@
 /*   By: eshintan <eshintan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 15:42:48 by eshintan          #+#    #+#             */
-/*   Updated: 2024/03/08 01:19:42 by eshintan         ###   ########.fr       */
+/*   Updated: 2024/03/30 23:26:34 by eshintan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,17 @@ void	send_bit(pid_t pid, char c)
 	while (i < 8)
 	{
 		if (c & 1)
-			kill(pid, SIGUSR1);
+		{
+			if (kill(pid, SIGUSR1) == -1)
+				exit(1);
+			//kill(pid, SIGUSR1);
+		}
 		else
-			kill(pid, SIGUSR2);
+		{
+			if (kill(pid, SIGUSR2) == -1)
+				exit(1);
+			//kill(pid, SIGUSR2);
+		}
 		c = c >> 1;
 		i++;
 		usleep(500);
@@ -45,7 +53,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 3)
 	{
-		printf("Usage: %s <pid> <string>\n", argv[0]);
+		ft_putstr_fd("Usage: ./client <pid> <string>\n", 1);
 		return (1);
 	}
 	pid = ft_atoi(argv[1]);
